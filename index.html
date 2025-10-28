@@ -92,67 +92,81 @@
             padding: 0;
         }
 
-        /* Стили для изображений */
-        .content-image {
-            max-width: 100%;
-            height: auto;
+        /* НОВЫЕ СТИЛИ ДЛЯ УЛУЧШЕННОЙ СТРУКТУРЫ */
+        .content-block {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: var(--secondary-bg);
             border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--card-shadow);
-            transition: var(--transition);
+            border-left: 4px solid var(--accent-color);
         }
 
-        .content-image:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-glow);
-            border-color: var(--accent-color);
+        .content-block h4 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .image-caption {
-            text-align: center;
-            color: var(--text-muted);
+        .step-number {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
             font-size: 0.9em;
-            margin-top: 10px;
-            font-style: italic;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        .method-visual {
+        .category-tag {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-family: 'JetBrains Mono', monospace;
+            margin-left: 10px;
+            border: 1px solid var(--accent-color);
+        }
+
+        .icon-bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .icon-bullet .icon {
+            font-size: 1.5em;
+            color: var(--accent-color);
+            min-width: 30px;
             text-align: center;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
             margin: 40px 0;
         }
 
-        .method-scheme {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .tool-image {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 15px;
-            border: 2px solid var(--accent-color);
-        }
-
-        .resource-visual {
-            text-align: center;
-            margin-top: 25px;
-        }
-
-        .resource-image {
-            max-width: 200px;
-            height: auto;
-            border-radius: 12px;
-            opacity: 0.9;
-            transition: var(--transition);
-        }
-
-        .resource-image:hover {
-            opacity: 1;
-            transform: scale(1.05);
+        .template-category {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
         /* Остальные стили остаются без изменений */
@@ -1022,49 +1036,87 @@
             </div>
         </section>
 
-        <!-- О проекте -->
+        <!-- О проекте - УЛУЧШЕННАЯ СТРУКТУРА -->
         <section id="about" class="section">
             <h2 class="section-title editable">О ПРОЕКТЕ</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <h3 class="editable">Миссия проекта</h3>
-                    <p class="editable">Этот сайт создан для системного обучения OSINT - открытой разведке. Мы даём инструменты и знания, чтобы каждый мог защитить себя и близких в цифровом пространстве.</p>
-                    
+                    <!-- УЛУЧШЕННАЯ СТРУКТУРА: Разбивка на блоки -->
+                    <div class="content-block">
+                        <h4>🎯 Миссия проекта</h4>
+                        <div class="icon-bullet">
+                            <div class="icon">📚</div>
+                            <div>
+                                <strong>Системное обучение</strong> - Пошаговый подход к освоению OSINT
+                            </div>
+                        </div>
+                        <div class="icon-bullet">
+                            <div class="icon">🛡️</div>
+                            <div>
+                                <strong>Защита данных</strong> - Инструменты для безопасности в цифровом пространстве
+                            </div>
+                        </div>
+                        <div class="icon-bullet">
+                            <div class="icon">🔍</div>
+                            <div>
+                                <strong>Практические навыки</strong> - Реальные кейсы и методики
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
                     <h3 class="editable">Для кого это?</h3>
-                    <ul class="editable">
-                        <li><strong>Новичкам</strong> - полный путь от основ до продвинутых техник</li>
-                        <li><strong>IT-специалистам</strong> - углубление знаний в кибербезопасности</li>
-                        <li><strong>Журналистам</strong> - проверка информации и источников</li>
-                        <li><strong>Всем пользователям</strong> - защита персональных данных онлайн</li>
-                    </ul>
+                    <div class="features-grid">
+                        <div class="feature-box editable">
+                            <h4>👶 Новичкам</h4>
+                            <p>Полный путь от основ до продвинутых техник с пошаговыми инструкциями</p>
+                        </div>
+                        <div class="feature-box editable">
+                            <h4>💻 IT-специалистам</h4>
+                            <p>Углубление знаний в кибербезопасности и цифровой разведке</p>
+                        </div>
+                        <div class="feature-box editable">
+                            <h4>📰 Журналистам</h4>
+                            <p>Проверка информации и источников для достоверных публикаций</p>
+                        </div>
+                        <div class="feature-box editable">
+                            <h4>👥 Всем пользователям</h4>
+                            <p>Защита персональных данных и приватности в онлайн-пространстве</p>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
 
                     <h3 class="editable">Что вы найдёте здесь?</h3>
                     <div class="features-grid">
                         <div class="feature-box editable">
                             <h4>📚 Пошаговые инструкции</h4>
-                            <p>Готовые шаблоны для разных типов расследований</p>
+                            <p>Готовые шаблоны для разных типов расследований с четкими этапами</p>
                         </div>
                         <div class="feature-box editable">
                             <h4>🛠️ Проверенные инструменты</h4>
-                            <p>Только рабочие сервисы и методики</p>
+                            <p>Только рабочие сервисы и методики, протестированные на практике</p>
                         </div>
                         <div class="feature-box editable">
                             <h4>🎯 Практические кейсы</h4>
-                            <p>Реальные примеры и сценарии применения</p>
+                            <p>Реальные примеры и сценарии применения с разбором результатов</p>
                         </div>
                         <div class="feature-box editable">
                             <h4>🛡️ Безопасность прежде всего</h4>
-                            <p>Этичное использование технологий и методов</p>
+                            <p>Этичное использование технологий и методов в правовом поле</p>
                         </div>
                     </div>
+
+                    <div class="divider"></div>
 
                     <h3 class="editable">Как пользоваться?</h3>
                     <div class="usage-steps">
                         <ol class="editable">
-                            <li>Изучите базовые шаблоны в разделе "Шаблоны"</li>
-                            <li>Освойте инструменты в соответствующем разделе</li>
-                            <li>Применяйте знания на практике, начиная с простых задач</li>
-                            <li>Всегда соблюдайте законодательство и этические нормы</li>
+                            <li><strong>Изучите базовые шаблоны</strong> - Начните с готовых решений в разделе "Шаблоны"</li>
+                            <li><strong>Освойте инструменты</strong> - Разберитесь с функционалом в соответствующем разделе</li>
+                            <li><strong>Применяйте знания на практике</strong> - Начинайте с простых задач, постепенно усложняя</li>
+                            <li><strong>Соблюдайте законодательство</strong> - Всегда работайте в рамках этических норм и закона</li>
                         </ol>
                     </div>
 
@@ -1076,21 +1128,29 @@
             </div>
         </section>
 
-        <!-- Шаблоны -->
+        <!-- Шаблоны - УЛУЧШЕННАЯ СТРУКТУРА -->
         <section id="templates" class="section">
             <h2 class="section-title editable">ШАБЛОНЫ ДЛЯ ИЗУЧЕНИЯ</h2>
+            
+            <div class="content-block">
+                <h4>📋 Структура шаблонов</h4>
+                <p>Каждый шаблон содержит пошаговую инструкцию с конкретными действиями и инструментами для достижения результата.</p>
+            </div>
+
             <div class="templates-grid" id="templatesGrid">
                 <!-- Шаблон 1 -->
                 <div class="template-box">
                     <button class="delete-template" onclick="deleteTemplate(this)">×</button>
                     <div class="template-number">1</div>
                     <div class="template-content">
+                        <div class="template-category">👤 Поиск личности</div>
                         <h3 class="template-title editable">ПОИСК ПО ЛИЧНОСТИ</h3>
+                        <p class="text-muted" style="margin-bottom: 20px; font-size: 0.95em;">Комплексный подход к сбору информации о физическом лице</p>
                         <ul class="template-steps">
-                            <li class="editable"><strong>Сбор базовых данных:</strong> ФИО, дата рождения</li>
-                            <li class="editable"><strong>Социальные сети:</strong> ВК, Instagram, Facebook</li>
-                            <li class="editable"><strong>Анализ фотографий:</strong> EXIF, геолокация</li>
-                            <li class="editable"><strong>Проверка баз данных:</strong> Реестры, суды</li>
+                            <li class="editable"><strong>Сбор базовых данных:</strong> ФИО, дата рождения, место жительства</li>
+                            <li class="editable"><strong>Социальные сети:</strong> ВК, Instagram, Facebook, Telegram</li>
+                            <li class="editable"><strong>Анализ фотографий:</strong> EXIF данные, геолокация, обратный поиск</li>
+                            <li class="editable"><strong>Проверка баз данных:</strong> Реестры, суды, государственные базы</li>
                         </ul>
                     </div>
                 </div>
@@ -1100,12 +1160,14 @@
                     <button class="delete-template" onclick="deleteTemplate(this)">×</button>
                     <div class="template-number">2</div>
                     <div class="template-content">
+                        <div class="template-category">🔍 Цифровой след</div>
                         <h3 class="template-title editable">ЦИФРОВОЙ СЛЕД</h3>
+                        <p class="text-muted" style="margin-bottom: 20px; font-size: 0.95em;">Отслеживание онлайн-активности и цифровой идентичности</p>
                         <ul class="template-steps">
-                            <li class="editable"><strong>Поиск по email:</strong> Утечки, регистрации</li>
-                            <li class="editable"><strong>Анализ никнеймов:</strong> Поиск по username</li>
-                            <li class="editable"><strong>История доменов:</strong> WHOIS, архивы</li>
-                            <li class="editable"><strong>Технический анализ:</strong> IP, устройства</li>
+                            <li class="editable"><strong>Поиск по email:</strong> Утечки данных, регистрации на сервисах</li>
+                            <li class="editable"><strong>Анализ никнеймов:</strong> Поиск по username across platforms</li>
+                            <li class="editable"><strong>История доменов:</strong> WHOIS данные, архивные версии сайтов</li>
+                            <li class="editable"><strong>Технический анализ:</strong> IP адреса, устройства, браузерные отпечатки</li>
                         </ul>
                     </div>
                 </div>
@@ -1115,50 +1177,63 @@
                     <button class="delete-template" onclick="deleteTemplate(this)">×</button>
                     <div class="template-number">3</div>
                     <div class="template-content">
+                        <div class="template-category">🌍 Геолокация</div>
                         <h3 class="template-title editable">ГЕОЛОКАЦИЯ</h3>
+                        <p class="text-muted" style="margin-bottom: 20px; font-size: 0.95em;">Определение местоположения и анализ географических данных</p>
                         <ul class="template-steps">
-                            <li class="editable"><strong>Метаданные фото:</strong> GPS координаты</li>
-                            <li class="editable"><strong>Сравнение локаций:</strong> Архитектура, вывески</li>
-                            <li class="editable"><strong>Спутниковые снимки:</strong> Google Earth, карты</li>
-                            <li class="editable"><strong>Анализ перемещений:</strong> Паттерны, маршруты</li>
+                            <li class="editable"><strong>Метаданные фото:</strong> GPS координаты, дата и время съемки</li>
+                            <li class="editable"><strong>Сравнение локаций:</strong> Архитектура, вывески, природные объекты</li>
+                            <li class="editable"><strong>Спутниковые снимки:</strong> Google Earth, Яндекс.Карты, Bing Maps</li>
+                            <li class="editable"><strong>Анализ перемещений:</strong> Паттерны движения, регулярные маршруты</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Инструменты -->
+        <!-- Инструменты - УЛУЧШЕННАЯ СТРУКТУРА -->
         <section id="tools" class="section">
             <h2 class="section-title editable">ИНСТРУМЕНТЫ</h2>
+
+            <div class="content-block">
+                <h4>🛠️ Категории инструментов</h4>
+                <p>Все инструменты разделены по функциональности для удобного поиска и использования.</p>
+            </div>
+
             <div class="tools-grid">
                 <div class="tool-box">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvewNX7tCPiWwqawlzQL0f6zu5WEkqCfsm1A&s" 
                          alt="Поиск по соцсетям" 
                          class="tool-image">
-                    <h3 class="tool-title editable">ПОИСК ПО СОЦСЕТЯМ</h3>
-                    <p class="tool-description editable">Инструменты для поиска информации в социальных сетях и анализа профилей</p>
+                    <h3 class="tool-title editable">ПОИСК ПО СОЦСЕТЯМ <span class="category-tag">SOCIAL</span></h3>
+                    <p class="tool-description editable">Инструменты для поиска информации в социальных сетях и анализа профилей, включая кросс-платформенный поиск</p>
                 </div>
                 <div class="tool-box">
                     <div class="tool-icon">📧</div>
-                    <h3 class="tool-title editable">АНАЛИЗ EMAIL</h3>
-                    <p class="tool-description editable">Проверка email адресов, поиск утечек и связанных аккаунтов</p>
+                    <h3 class="tool-title editable">АНАЛИЗ EMAIL <span class="category-tag">EMAIL</span></h3>
+                    <p class="tool-description editable">Проверка email адресов, поиск утечек и связанных аккаунтов через специализированные сервисы</p>
                 </div>
                 <div class="tool-box">
                     <div class="tool-icon">🖼️</div>
-                    <h3 class="tool-title editable">АНАЛИЗ ИЗОБРАЖЕНИЙ</h3>
-                    <p class="tool-description editable">Извлечение метаданных и обратный поиск по изображениям</p>
+                    <h3 class="tool-title editable">АНАЛИЗ ИЗОБРАЖЕНИЙ <span class="category-tag">IMAGE</span></h3>
+                    <p class="tool-description editable">Извлечение метаданных и обратный поиск по изображениям для установления происхождения</p>
                 </div>
                 <div class="tool-box">
                     <div class="tool-icon">🌍</div>
-                    <h3 class="tool-title editable">ГЕОЛОКАЦИЯ</h3>
-                    <p class="tool-description editable">Инструменты для определения местоположения и анализа геоданных</p>
+                    <h3 class="tool-title editable">ГЕОЛОКАЦИЯ <span class="category-tag">GEO</span></h3>
+                    <p class="tool-description editable">Инструменты для определения местоположения и анализа геоданных из различных источников</p>
                 </div>
             </div>
         </section>
 
-        <!-- Методики -->
+        <!-- Методики - УЛУЧШЕННАЯ СТРУКТУРА -->
         <section id="methods" class="section">
             <h2 class="section-title editable">МЕТОДИКИ</h2>
+
+            <div class="content-block">
+                <h4>🎯 Подход к исследованию</h4>
+                <p>Систематизированные методики позволяют структурировать процесс сбора и анализа информации.</p>
+            </div>
             
             <!-- Схема OSINT -->
             <div class="method-visual">
@@ -1170,38 +1245,44 @@
 
             <div class="methods-list">
                 <div class="method-item editable">
-                    <strong>Методика сбора информации</strong> - Пошаговый подход к поиску и анализу данных
+                    <strong>Методика сбора информации</strong> - Пошаговый подход к поиску и анализу данных с использованием различных источников
                 </div>
                 <div class="method-item editable">
-                    <strong>Верификация источников</strong> - Методы проверки достоверности информации
+                    <strong>Верификация источников</strong> - Методы проверки достоверности информации и установления надежности источников
                 </div>
                 <div class="method-item editable">
-                    <strong>Анализ цифрового следа</strong> - Техники отслеживания онлайн-активности
+                    <strong>Анализ цифрового следа</strong> - Техники отслеживания онлайн-активности и восстановления цифровой идентичности
                 </div>
                 <div class="method-item editable">
-                    <strong>Юридические аспекты</strong> - Правовые рамки работы с открытыми данными
+                    <strong>Юридические аспекты</strong> - Правовые рамки работы с открытыми данными и этические принципы исследований
                 </div>
             </div>
         </section>
 
-        <!-- Ресурсы -->
+        <!-- Ресурсы - УЛУЧШЕННАЯ СТРУКТУРА -->
         <section id="resources" class="section">
             <h2 class="section-title editable">РЕСУРСЫ</h2>
+
+            <div class="content-block">
+                <h4>📚 Дополнительные материалы</h4>
+                <p>Подборка полезных ресурсов для углубленного изучения OSINT и смежных тем.</p>
+            </div>
+
             <div class="tools-grid">
                 <div class="tool-box">
                     <div class="tool-icon">📚</div>
-                    <h3 class="tool-title editable">БАЗЫ ДАННЫХ</h3>
-                    <p class="tool-description editable">Открытые базы данных и реестры для проверки информации</p>
+                    <h3 class="tool-title editable">БАЗЫ ДАННЫХ <span class="category-tag">DATA</span></h3>
+                    <p class="tool-description editable">Открытые базы данных и реестры для проверки информации, включая государственные и коммерческие источники</p>
                 </div>
                 <div class="tool-box">
                     <div class="tool-icon">🔧</div>
-                    <h3 class="tool-title editable">ПОЛЕЗНЫЕ СЕРВИСЫ</h3>
-                    <p class="tool-description editable">Онлайн-сервисы и инструменты для OSINT исследований</p>
+                    <h3 class="tool-title editable">ПОЛЕЗНЫЕ СЕРВИСЫ <span class="category-tag">TOOLS</span></h3>
+                    <p class="tool-description editable">Онлайн-сервисы и инструменты для OSINT исследований с описанием функционала и применения</p>
                 </div>
                 <div class="tool-box">
                     <div class="tool-icon">📖</div>
-                    <h3 class="tool-title editable">ОБУЧАЮЩИЕ МАТЕРИАЛЫ</h3>
-                    <p class="tool-description editable">Книги, курсы и руководства по OSINT разведке</p>
+                    <h3 class="tool-title editable">ОБУЧАЮЩИЕ МАТЕРИАЛЫ <span class="category-tag">LEARN</span></h3>
+                    <p class="tool-description editable">Книги, курсы и руководства по OSINT разведке для разных уровней подготовки</p>
                     
                     <!-- Глобус с сетью -->
                     <div class="resource-visual">
@@ -1215,7 +1296,7 @@
     </div>
 
     <script>
-        // Весь JavaScript код остается без изменений
+        // ВЕСЬ JavaScript КОД ВОССТАНАВЛИВАЮ ПОЛНОСТЬЮ!
         let lastScrollY = window.scrollY;
         let isNavHidden = false;
         let scrollTimeout;
