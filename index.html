@@ -491,40 +491,82 @@
             z-index: 999;
         }
 
-        /* Адаптивность */
+        /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
+                padding: 10px;
             }
             
             .nav-links {
-                gap: 15px;
+                gap: 8px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
             
+            .nav-link {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+            
             .main-content {
-                margin-top: 120px;
+                margin-top: 100px;
+                padding: 20px 10px;
             }
             
             h1 {
-                font-size: 2.2em;
+                font-size: 2em;
             }
             
             .section-title {
-                font-size: 2em;
+                font-size: 1.8em;
+                margin-bottom: 30px;
             }
             
             .templates-grid,
             .tools-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .admin-controls {
-                top: 100px;
+                top: 90px;
                 right: 10px;
-                width: 180px;
+                width: 170px;
+            }
+            
+            .hero-section {
+                padding: 40px 0;
+                margin-bottom: 40px;
+            }
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 5px;
+            }
+            
+            .nav-link {
+                padding: 5px 8px;
+                font-size: 0.75em;
+            }
+            
+            .logo {
+                font-size: 1.2em;
+            }
+            
+            .main-content {
+                margin-top: 110px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .section-title {
+                font-size: 1.5em;
             }
         }
 
@@ -1013,84 +1055,4 @@
         });
     </script>
 </body>
-
 </html>
-
-        /* Адаптивность для мобильных */
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 10px;
-                padding: 10px;
-            }
-            
-            .nav-links {
-                gap: 8px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-link {
-                padding: 6px 12px;
-                font-size: 0.8em;
-            }
-            
-            .main-content {
-                margin-top: 100px;
-                padding: 20px 10px;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
-            
-            .section-title {
-                font-size: 1.8em;
-                margin-bottom: 30px;
-            }
-            
-            .templates-grid,
-            .tools-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .admin-controls {
-                top: 90px;
-                right: 10px;
-                width: 170px;
-            }
-            
-            .hero-section {
-                padding: 40px 0;
-                margin-bottom: 40px;
-            }
-        }
-
-        /* Для очень маленьких экранов */
-        @media (max-width: 480px) {
-            .nav-links {
-                gap: 5px;
-            }
-            
-            .nav-link {
-                padding: 5px 8px;
-                font-size: 0.75em;
-            }
-            
-            .logo {
-                font-size: 1.2em;
-            }
-            
-            .main-content {
-                margin-top: 110px;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-            }
-            
-            .section-title {
-                font-size: 1.5em;
-            }
-        }
