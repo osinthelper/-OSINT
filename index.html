@@ -36,6 +36,57 @@
             font-weight: 400;
         }
 
+        /* НОВЫЕ СТИЛИ ДЛЯ ГЕРОЙ-БАННЕРА */
+        .hero-banner {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-glow);
+            border: 2px solid var(--accent-color);
+        }
+
+        .hero-background {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.7);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .hero-text-overlay h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 4em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
+            line-height: 1.1;
+        }
+
+        .hero-text-overlay .subtitle {
+            font-size: 1.6em;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
         /* Стили для изображений */
         .content-image {
             max-width: 100%;
@@ -58,18 +109,6 @@
             font-size: 0.9em;
             margin-top: 10px;
             font-style: italic;
-        }
-
-        .hero-image {
-            width: 100%;
-            max-width: 600px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin: 30px auto;
-            display: block;
-            border: 2px solid var(--accent-color);
-            box-shadow: var(--shadow-glow);
         }
 
         .method-visual {
@@ -256,24 +295,7 @@
         .hero-section {
             text-align: center;
             margin-bottom: 80px;
-            padding: 80px 0;
-        }
-
-        h1 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 3.5em;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 25px;
-            line-height: 1.2;
-        }
-
-        .subtitle {
-            font-size: 1.4em;
-            color: var(--text-secondary);
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto;
+            padding: 40px 0;
         }
 
         .about-content {
@@ -816,17 +838,63 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Адаптивность */
+        /* Адаптивность для нового герой-баннера */
+        @media (max-width: 1024px) {
+            .hero-text-overlay h1 {
+                font-size: 3.2em;
+            }
+            .hero-text-overlay .subtitle {
+                font-size: 1.4em;
+            }
+            .hero-background {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-banner {
+                max-width: 100%;
+                margin: 0 15px;
+            }
+            .hero-text-overlay {
+                padding: 30px 20px;
+            }
+            .hero-text-overlay h1 {
+                font-size: 2.5em;
+                margin-bottom: 15px;
+            }
+            .hero-text-overlay .subtitle {
+                font-size: 1.2em;
+            }
+            .hero-background {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text-overlay h1 {
+                font-size: 2em;
+            }
+            .hero-text-overlay .subtitle {
+                font-size: 1em;
+            }
+            .hero-background {
+                height: 250px;
+            }
+            .hero-text-overlay {
+                padding: 20px 15px;
+            }
+        }
+
+        /* Остальная адаптивность */
         @media (max-width: 1024px) {
             .nav-container { padding: 0 20px; }
             .nav-links { gap: 20px; }
             .nav-link { padding: 8px 16px; font-size: 0.9em; }
             .main-content { padding: 40px 20px; }
             .section-title { font-size: 2.4em; }
-            h1 { font-size: 3em; }
             .templates-grid { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
             .features-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-            .hero-image { max-width: 500px; height: 250px; }
         }
 
         @media (max-width: 768px) {
@@ -840,15 +908,12 @@
             .main-content { margin-top: 120px; padding: 30px 15px; }
             .main-content.compact { margin-top: 90px; }
             .section { scroll-margin-top: 100px; margin-bottom: 70px; }
-            h1 { font-size: 2.4em; }
             .section-title { font-size: 2em; margin-bottom: 40px; }
-            .subtitle { font-size: 1.2em; }
             .templates-grid, .tools-grid, .features-grid { grid-template-columns: 1fr; gap: 20px; }
             .admin-controls { top: 90px; right: 15px; width: 200px; }
-            .hero-section { padding: 60px 0; margin-bottom: 60px; }
+            .hero-section { padding: 30px 0; margin-bottom: 60px; }
             .template-box, .tool-box, .feature-box { padding: 25px; }
             .about-text h3 { font-size: 1.5em; }
-            .hero-image { max-width: 100%; height: 200px; margin: 20px auto; }
             .tool-image { width: 60px; height: 60px; }
         }
 
@@ -861,12 +926,9 @@
             .main-content { margin-top: 110px; }
             .main-content.compact { margin-top: 80px; }
             .section { scroll-margin-top: 90px; }
-            h1 { font-size: 2em; }
             .section-title { font-size: 1.7em; }
-            .subtitle { font-size: 1.1em; }
             .template-box, .tool-box, .feature-box { padding: 20px; }
             .methods-list, .usage-steps { padding: 25px; }
-            .hero-image { height: 150px; }
         }
 
         @keyframes glow {
@@ -949,18 +1011,20 @@
         <!-- Главная -->
         <section id="home" class="section">
             <div class="hero-section">
-                <h1 class="glow editable">OSINT С НУЛЯ</h1>
-                <p class="subtitle editable">Полное руководство по разведке открытых источников</p>
-                
-                <!-- Главное фото -->
-                <img src="https://media.licdn.com/dms/image/v2/D4E12AQH4Y9U4BarhWQ/article-cover_image-shrink_720_1280/B4EZietZvhHgAM-/0/1755009375351?e=2147483647&v=beta&t=oKG1icoMr-XFUF_c6vyVB5NL6Lj4sCtkIcMy1ZRb6R0" 
-                     alt="OSINT исследование" 
-                     class="hero-image">
-                <p class="image-caption">Профессиональный подход к анализу открытых источников информации</p>
+                <!-- НОВЫЙ ГЕРОЙ-БАННЕР С КАРТИНКОЙ И ТЕКСТОМ ПОВЕРХ -->
+                <div class="hero-banner">
+                    <img src="https://www.recordedfuture.com/threat-intelligence-101/intelligence-sources-collection/media_136864d135de8cd97908acc5377a2114a8a1a094f.png?width=750&format=png&optimize=medium" 
+                         alt="OSINT источники" 
+                         class="hero-background">
+                    <div class="hero-text-overlay">
+                        <h1 class="glow editable">OSINT С НУЛЯ</h1>
+                        <p class="subtitle editable">Полное руководство по разведке открытых источников</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- О проекте -->
+        <!-- Остальные секции без изменений -->
         <section id="about" class="section">
             <h2 class="section-title editable">О ПРОЕКТЕ</h2>
             <div class="about-content">
