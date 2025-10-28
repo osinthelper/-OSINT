@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT с нуля - Руководство по разведке</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        /* Верхняя навигационная панель */
+        .top-nav {
+            background: #111111;
+            border-bottom: 2px solid #00ff00;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 255, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ffffff;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+            text-shadow: 0 0 8px #ffffff;
+        }
+
+        .admin-access {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .admin-btn {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #00ff00;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 15px #00ff00;
+        }
+
+        /* Основной контент */
+        .main-content {
+            margin-top: 80px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Секции */
+        .section {
+            margin-bottom: 80px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 0 0 10px #ffffff;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 15px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 0;
+        }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #ffffff;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #cccccc;
+            opacity: 0.9;
+        }
+
+        /* Стили для шаблонов */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .template-box {
+            background: #111111;
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .template-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+            border-color: #00cc00;
+        }
+
+        .template-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #00ff00;
+            color: #000;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1em;
+            border: 3px solid #111111;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .delete-template {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #111111;
+            font-size: 0.9em;
+        }
+
+        .edit-mode .delete-template {
+            display: flex;
+        }
+
+        .delete-template:hover {
+            background: #cc0000;
+            transform: scale(1.1);
+        }
+
+        .template-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .template-steps {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .template-steps li {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+            padding: 10px 0;
+            border-bottom: 1px solid #222;
+            position: relative;
+            padding-left: 25px;
+            color: #cccccc;
+        }
+
+        .template-steps li:before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: #00ff00;
+            font-weight: bold;
+            font-size: 1.1em;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .template-steps li:last-child {
+            border-bottom: none;
+        }
+
+        .template-steps strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Стили для инструментов */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tool-box {
+            background: #111111;
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tool-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 0, 0.2);
+            border-color: #00cc00;
+        }
+
+        .tool-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #00ff00;
+        }
+
+        .tool-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .tool-description {
+            font-size: 0.9em;
+            color: #cccccc;
+            line-height: 1.5;
+        }
+
+        /* Стили для методик */
+        .methods-list {
+            background: #111111;
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .method-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #222;
+            color: #cccccc;
+        }
+
+        .method-item:last-child {
+            border-bottom: none;
+        }
+
+        .method-item strong {
+            color: #ffffff;
+        }
+
+        /* Админ панель */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #111111;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 30px;
+            z-index: 1001;
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5em;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ff4444;
+            transform: scale(1.1);
+        }
+
+        .admin-panel h3 {
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            padding-right: 30px;
+        }
+
+        .code-input {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            border: 1px solid #00ff00;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1em;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+
+        .code-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        /* Вертикальная админ-панель */
+        .admin-controls {
+            display: none;
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: #111111;
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 15px;
+            z-index: 1000;
+            width: 200px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .admin-controls button {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: all 0.2s ease;
+            width: 100%;
+            text-align: left;
+        }
+
+        .admin-controls button:hover {
+            background: #00cc00;
+            transform: translateX(-2px);
+        }
+
+        .admin-controls button.delete-btn {
+            background: #ff4444;
+            color: white;
+            margin-top: 15px;
+        }
+
+        .admin-controls button.delete-btn:hover {
+            background: #cc0000;
+        }
+
+        .edit-mode .editable {
+            border: 1px dashed #00ff00;
+            padding: 5px;
+            margin: 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .edit-mode .editable:hover {
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .link-dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #111111;
+            border: 1px solid #00ff00;
+            padding: 25px;
+            border-radius: 8px;
+            z-index: 1002;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .link-dialog input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #000;
+            border: 1px solid #00ff00;
+            color: #ffffff;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .main-content {
+                margin-top: 120px;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+            
+            .templates-grid,
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-controls {
+                top: 100px;
+                right: 10px;
+                width: 180px;
+            }
+        }
+
+        /* Эффекты */
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #ffffff; }
+            to { text-shadow: 0 0 20px #ffffff, 0 0 30px #ffffff; }
+        }
+
+        .glow {
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Верхняя навигационная панель -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo" onclick="scrollToTop()">OSINT С НУЛЯ</div>
+            <div class="nav-links">
+                <a class="nav-link" onclick="scrollToSection('home')">ГЛАВНАЯ</a>
+                <a class="nav-link" onclick="scrollToSection('templates')">ШАБЛОНЫ</a>
+                <a class="nav-link" onclick="scrollToSection('tools')">ИНСТРУМЕНТЫ</a>
+                <a class="nav-link" onclick="scrollToSection('methods')">МЕТОДИКИ</a>
+                <a class="nav-link" onclick="scrollToSection('resources')">РЕСУРСЫ</a>
+            </div>
+            <div class="admin-access">
+                <button class="admin-btn" id="adminAccessBtn">АДМИН</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Оверлей для затемнения -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Панель ввода кода -->
+    <div class="admin-panel" id="adminPanel">
+        <button class="close-btn" onclick="hideAdminPanel()">×</button>
+        <h3>🔐 АДМИН ДОСТУП</h3>
+        <input type="password" class="code-input" id="adminCode" placeholder="ВВЕДИТЕ КОД" maxlength="4">
+        <p style="text-align: center; color: #cccccc; margin-top: 10px; font-size: 0.9em;">Введите код, состоящий из 4 цифр</p>
+    </div>
+
+    <!-- Вертикальная панель управления -->
+    <div class="admin-controls" id="adminControls">
+        <button class="edit-btn">✏️ РЕДАКТИРОВАТЬ</button>
+        <button class="add-btn">➕ НОВЫЙ ШАБЛОН</button>
+        <button class="link-btn">🔗 ДОБАВИТЬ ССЫЛКУ</button>
+        <button class="save-btn">💾 СОХРАНИТЬ</button>
+        <button class="delete-btn">🗑️ УДАЛИТЬ ШАБЛОН</button>
+        <button class="logout-btn">🚪 ВЫЙТИ</button>
+    </div>
+
+    <!-- Диалог добавления ссылки -->
+    <div class="link-dialog" id="linkDialog">
+        <h4 style="color: #ffffff; margin-bottom: 15px;">🔗 ДОБАВИТЬ ССЫЛКУ</h4>
+        <input type="text" id="linkText" placeholder="Текст ссылки">
+        <input type="url" id="linkUrl" placeholder="URL адрес">
+        <div style="text-align: center; margin-top: 15px;">
+            <button style="background: #00ff00; color: #000; border: none; padding: 8px 16px; margin: 0 5px; border-radius: 4px; cursor: pointer; font-family: 'JetBrains Mono', monospace;">Добавить</button>
+            <button style="background: #ff4444; color: white; border: none; padding: 8px 16px; margin: 0 5px; border-radius: 4px; cursor: pointer; font-family: 'JetBrains Mono', monospace;">Отмена</button>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="main-content">
+        <!-- Главная секция -->
+        <section id="home" class="section">
+            <div class="hero-section">
+                <h1 class="glow">OSINT С НУЛЯ</h1>
+                <p class="subtitle">Полное руководство по разведке открытых источников</p>
+            </div>
+        </section>
+
+        <!-- Шаблоны -->
+        <section id="templates" class="section">
+            <h2 class="section-title">ШАБЛОНЫ ДЛЯ ИЗУЧЕНИЯ</h2>
+            <div class="templates-grid" id="templatesGrid">
+                <!-- Шаблон 1 -->
+                <div class="template-box">
+                    <button class="delete-template" onclick="deleteTemplate(this)">×</button>
+                    <div class="template-number">1</div>
+                    <div class="template-content">
+                        <h3 class="template-title editable">ПОИСК ПО ЛИЧНОСТИ</h3>
+                        <ul class="template-steps">
+                            <li class="editable"><strong>Сбор базовых данных:</strong> ФИО, дата рождения</li>
+                            <li class="editable"><strong>Социальные сети:</strong> ВК, Instagram, Facebook</li>
+                            <li class="editable"><strong>Анализ фотографий:</strong> EXIF, геолокация</li>
+                            <li class="editable"><strong>Проверка баз данных:</strong> Реестры, суды</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Шаблон 2 -->
+                <div class="template-box">
+                    <button class="delete-template" onclick="deleteTemplate(this)">×</button>
+                    <div class="template-number">2</div>
+                    <div class="template-content">
+                        <h3 class="template-title editable">ЦИФРОВОЙ СЛЕД</h3>
+                        <ul class="template-steps">
+                            <li class="editable"><strong>Поиск по email:</strong> Утечки, регистрации</li>
+                            <li class="editable"><strong>Анализ никнеймов:</strong> Поиск по username</li>
+                            <li class="editable"><strong>История доменов:</strong> WHOIS, архивы</li>
+                            <li class="editable"><strong>Технический анализ:</strong> IP, устройства</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Шаблон 3 -->
+                <div class="template-box">
+                    <button class="delete-template" onclick="deleteTemplate(this)">×</button>
+                    <div class="template-number">3</div>
+                    <div class="template-content">
+                        <h3 class="template-title editable">ГЕОЛОКАЦИЯ</h3>
+                        <ul class="template-steps">
+                            <li class="editable"><strong>Метаданные фото:</strong> GPS координаты</li>
+                            <li class="editable"><strong>Сравнение локаций:</strong> Архитектура, вывески</li>
+                            <li class="editable"><strong>Спутниковые снимки:</strong> Google Earth, карты</li>
+                            <li class="editable"><strong>Анализ перемещений:</strong> Паттерны, маршруты</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Инструменты -->
+        <section id="tools" class="section">
+            <h2 class="section-title">ИНСТРУМЕНТЫ</h2>
+            <div class="tools-grid">
+                <div class="tool-box">
+                    <div class="tool-icon">🔍</div>
+                    <h3 class="tool-title">ПОИСК ПО СОЦСЕТЯМ</h3>
+                    <p class="tool-description">Инструменты для поиска информации в социальных сетях и анализа профилей</p>
+                </div>
+                <div class="tool-box">
+                    <div class="tool-icon">📧</div>
+                    <h3 class="tool-title">АНАЛИЗ EMAIL</h3>
+                    <p class="tool-description">Проверка email адресов, поиск утечек и связанных аккаунтов</p>
+                </div>
+                <div class="tool-box">
+                    <div class="tool-icon">🖼️</div>
+                    <h3 class="tool-title">АНАЛИЗ ИЗОБРАЖЕНИЙ</h3>
+                    <p class="tool-description">Извлечение метаданных и обратный поиск по изображениям</p>
+                </div>
+                <div class="tool-box">
+                    <div class="tool-icon">🌍</div>
+                    <h3 class="tool-title">ГЕОЛОКАЦИЯ</h3>
+                    <p class="tool-description">Инструменты для определения местоположения и анализа геоданных</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Методики -->
+        <section id="methods" class="section">
+            <h2 class="section-title">МЕТОДИКИ</h2>
+            <div class="methods-list">
+                <div class="method-item">
+                    <strong>Методика сбора информации</strong> - Пошаговый подход к поиску и анализу данных
+                </div>
+                <div class="method-item">
+                    <strong>Верификация источников</strong> - Методы проверки достоверности информации
+                </div>
+                <div class="method-item">
+                    <strong>Анализ цифрового следа</strong> - Техники отслеживания онлайн-активности
+                </div>
+                <div class="method-item">
+                    <strong>Юридические аспекты</strong> - Правовые рамки работы с открытыми данными
+                </div>
+            </div>
+        </section>
+
+        <!-- Ресурсы -->
+        <section id="resources" class="section">
+            <h2 class="section-title">РЕСУРСЫ</h2>
+            <div class="tools-grid">
+                <div class="tool-box">
+                    <div class="tool-icon">📚</div>
+                    <h3 class="tool-title">БАЗЫ ДАННЫХ</h3>
+                    <p class="tool-description">Открытые базы данных и реестры для проверки информации</p>
+                </div>
+                <div class="tool-box">
+                    <div class="tool-icon">🔧</div>
+                    <h3 class="tool-title">ПОЛЕЗНЫЕ СЕРВИСЫ</h3>
+                    <p class="tool-description">Онлайн-сервисы и инструменты для OSINT исследований</p>
+                </div>
+                <div class="tool-box">
+                    <div class="tool-icon">📖</div>
+                    <h3 class="tool-title">ОБУЧАЮЩИЕ МАТЕРИАЛЫ</h3>
+                    <p class="tool-description">Книги, курсы и руководства по OSINT разведке</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Функции для навигации
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Функции для админ-панели
+        function showAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('adminCode').focus();
+        }
+
+        function hideAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('adminCode').value = '';
+        }
+
+        // Проверка кода
+        function checkCode(input) {
+            if (input.value.length === 4) {
+                if (input.value === '2303') {
+                    document.getElementById('adminPanel').style.display = 'none';
+                    document.getElementById('adminControls').style.display = 'block';
+                    document.getElementById('overlay').style.display = 'none';
+                    input.value = '';
+                } else {
+                    input.style.borderColor = '#ff4444';
+                    input.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        input.style.animation = '';
+                        input.value = '';
+                        input.focus();
+                    }, 500);
+                }
+            }
+        }
+
+        // Остальной JavaScript код
+        let editMode = false;
+        let deleteMode = false;
+        let currentEditingElement = null;
+
+        // Режим редактирования
+        function toggleEditMode() {
+            editMode = !editMode;
+            document.body.classList.toggle('edit-mode', editMode);
+            
+            const btn = document.querySelector('.edit-btn');
+            if (editMode) {
+                btn.innerHTML = '💾 ЗАВЕРШИТЬ РЕДАКТИРОВАНИЕ';
+                document.querySelectorAll('.editable').forEach(el => {
+                    el.setAttribute('contenteditable', 'true');
+                    el.addEventListener('click', handleElementClick);
+                });
+            } else {
+                btn.innerHTML = '✏️ РЕДАКТИРОВАТЬ';
+                document.querySelectorAll('.editable').forEach(el => {
+                    el.removeAttribute('contenteditable');
+                    el.removeEventListener('click', handleElementClick);
+                });
+                saveChanges();
+            }
+            
+            // Выключаем режим удаления при включении редактирования
+            if (editMode) {
+                deleteMode = false;
+                document.querySelector('.delete-btn').innerHTML = '🗑️ УДАЛИТЬ ШАБЛОН';
+            }
+        }
+
+        function handleElementClick(e) {
+            if (editMode) {
+                currentEditingElement = e.target;
+            }
+        }
+
+        // Режим удаления шаблонов
+        function toggleDeleteMode() {
+            deleteMode = !deleteMode;
+            const btn = document.querySelector('.delete-btn');
+            
+            if (deleteMode) {
+                btn.innerHTML = '❌ ОТМЕНИТЬ УДАЛЕНИЕ';
+                btn.style.background = '#ff4444';
+                // Показываем кнопки удаления на всех шаблонах
+                document.querySelectorAll('.delete-template').forEach(deleteBtn => {
+                    deleteBtn.style.display = 'flex';
+                });
+            } else {
+                btn.innerHTML = '🗑️ УДАЛИТЬ ШАБЛОН';
+                btn.style.background = '#ff4444';
+                // Скрываем кнопки удаления
+                document.querySelectorAll('.delete-template').forEach(deleteBtn => {
+                    deleteBtn.style.display = 'none';
+                });
+            }
+        }
+
+        // Удаление шаблона
+        function deleteTemplate(button) {
+            if (deleteMode) {
+                const template = button.closest('.template-box');
+                if (confirm('Удалить этот шаблон?')) {
+                    template.remove();
+                    // Обновляем номера оставшихся шаблонов
+                    updateTemplateNumbers();
+                    saveChanges();
+                }
+            }
+        }
+
+        // Обновление номеров шаблонов
+        function updateTemplateNumbers() {
+            const templates = document.querySelectorAll('.template-box');
+            templates.forEach((template, index) => {
+                const numberElement = template.querySelector('.template-number');
+                numberElement.textContent = index + 1;
+            });
+        }
+
+        // Добавить новый шаблон
+        function addNewTemplate() {
+            const templatesGrid = document.getElementById('templatesGrid');
+            const newNumber = templatesGrid.children.length + 1;
+            
+            const newTemplate = document.createElement('div');
+            newTemplate.className = 'template-box';
+            newTemplate.innerHTML = `
+                <button class="delete-template" onclick="deleteTemplate(this)">×</button>
+                <div class="template-number">${newNumber}</div>
+                <div class="template-content">
+                    <h3 class="template-title editable" contenteditable="true">НОВЫЙ ШАБЛОН ${newNumber}</h3>
+                    <ul class="template-steps">
+                        <li class="editable" contenteditable="true"><strong>Шаг 1:</strong> Описание шага</li>
+                        <li class="editable" contenteditable="true"><strong>Шаг 2:</strong> Описание шага</li>
+                        <li class="editable" contenteditable="true"><strong>Шаг 3:</strong> Описание шага</li>
+                    </ul>
+                </div>
+            `;
+            
+            templatesGrid.appendChild(newTemplate);
+            
+            // Если режим редактирования включен, делаем новый шаблон редактируемым
+            if (editMode) {
+                newTemplate.querySelectorAll('.editable').forEach(el => {
+                    el.setAttribute('contenteditable', 'true');
+                    el.addEventListener('click', handleElementClick);
+                });
+            }
+            
+            // Если режим удаления включен, показываем кнопку удаления
+            if (deleteMode) {
+                newTemplate.querySelector('.delete-template').style.display = 'flex';
+            }
+        }
+
+        // Диалог добавления ссылки
+        function showLinkDialog() {
+            if (!editMode || !currentEditingElement) {
+                alert('Сначала включите режим редактирования и выберите элемент для добавления ссылки');
+                return;
+            }
+            document.getElementById('linkDialog').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function hideLinkDialog() {
+            document.getElementById('linkDialog').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function insertLink() {
+            const text = document.getElementById('linkText').value;
+            const url = document.getElementById('linkUrl').value;
+            
+            if (text && url) {
+                const link = `<a href="${url}" target="_blank" style="color: #00ff00; text-decoration: underline;">${text}</a>`;
+                currentEditingElement.innerHTML += ' ' + link;
+                hideLinkDialog();
+                document.getElementById('linkText').value = '';
+                document.getElementById('linkUrl').value = '';
+            }
+        }
+
+        // Сохранение изменений
+        function saveChanges() {
+            const content = {
+                templates: []
+            };
+            
+            // Сохраняем каждый шаблон
+            document.querySelectorAll('.template-box').forEach((template, index) => {
+                const templateData = {
+                    title: template.querySelector('.template-title').innerHTML,
+                    steps: []
+                };
+                
+                template.querySelectorAll('.template-steps li').forEach(step => {
+                    templateData.steps.push(step.innerHTML);
+                });
+                
+                content.templates.push(templateData);
+            });
+            
+            localStorage.setItem('osint-site-data', JSON.stringify(content));
+            alert('✅ Изменения сохранены!');
+        }
+
+        // Загрузка сохраненных данных
+        function loadSavedData() {
+            const saved = localStorage.getItem('osint-site-data');
+            if (saved) {
+                const content = JSON.parse(saved);
+                
+                if (content.templates) {
+                    const templatesGrid = document.getElementById('templatesGrid');
+                    templatesGrid.innerHTML = '';
+                    
+                    content.templates.forEach((templateData, index) => {
+                        const template = document.createElement('div');
+                        template.className = 'template-box';
+                        template.innerHTML = `
+                            <button class="delete-template" onclick="deleteTemplate(this)">×</button>
+                            <div class="template-number">${index + 1}</div>
+                            <div class="template-content">
+                                <h3 class="template-title editable">${templateData.title}</h3>
+                                <ul class="template-steps">
+                                    ${templateData.steps.map(step => `<li class="editable">${step}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                        templatesGrid.appendChild(template);
+                    });
+                }
+            }
+        }
+
+        // Выход из админки
+        function logoutAdmin() {
+            editMode = false;
+            deleteMode = false;
+            document.body.classList.remove('edit-mode');
+            document.getElementById('adminControls').style.display = 'none';
+            document.querySelectorAll('.editable').forEach(el => {
+                el.removeAttribute('contenteditable');
+            });
+            document.querySelectorAll('.delete-template').forEach(btn => {
+                btn.style.display = 'none';
+            });
+            document.querySelector('.delete-btn').innerHTML = '🗑️ УДАЛИТЬ ШАБЛОН';
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            // Назначаем обработчики кнопок
+            document.getElementById('adminAccessBtn').addEventListener('click', showAdminPanel);
+            document.querySelector('.edit-btn').addEventListener('click', toggleEditMode);
+            document.querySelector('.add-btn').addEventListener('click', addNewTemplate);
+            document.querySelector('.link-btn').addEventListener('click', showLinkDialog);
+            document.querySelector('.save-btn').addEventListener('click', saveChanges);
+            document.querySelector('.delete-btn').addEventListener('click', toggleDeleteMode);
+            document.querySelector('.logout-btn').addEventListener('click', logoutAdmin);
+            
+            // Обработчик для кода
+            document.getElementById('adminCode').addEventListener('input', function(e) {
+                checkCode(this);
+            });
+            
+            // Обработчики для диалога ссылок
+            document.querySelectorAll('.link-dialog button')[0].addEventListener('click', insertLink);
+            document.querySelectorAll('.link-dialog button')[1].addEventListener('click', hideLinkDialog);
+            
+            // Закрытие админ-панели по клику на оверлей
+            document.getElementById('overlay').addEventListener('click', hideAdminPanel);
+            
+            loadSavedData();
+        });
+    </script>
+</body>
+</html>
