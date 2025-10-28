@@ -203,6 +203,161 @@
             margin: 0 auto;
         }
 
+        /* Стили для страницы О проекте */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-text h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8em;
+            color: var(--accent-color);
+            margin: 40px 0 20px 0;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        .about-text p {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .about-text ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .about-text li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .about-text li:before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.3em;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .about-text li:last-child {
+            border-bottom: none;
+        }
+
+        .about-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-box {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            transition: var(--transition);
+        }
+
+        .feature-box:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .feature-box h4 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+
+        .feature-box p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .usage-steps {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .usage-steps ol {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .usage-steps li {
+            counter-increment: step-counter;
+            padding: 15px 0 15px 50px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .usage-steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .usage-steps li:last-child {
+            border-bottom: none;
+        }
+
+        .important-note {
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .important-note h4 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .important-note p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-size: 1em;
+        }
+
         /* Стили для шаблонов */
         .templates-grid {
             display: grid;
@@ -626,6 +781,10 @@
                 grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
                 gap: 25px;
             }
+            
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
         }
 
         /* Адаптивность для мобильных */
@@ -692,7 +851,8 @@
             }
             
             .templates-grid,
-            .tools-grid {
+            .tools-grid,
+            .features-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -709,8 +869,13 @@
             }
 
             .template-box,
-            .tool-box {
+            .tool-box,
+            .feature-box {
                 padding: 25px;
+            }
+            
+            .about-text h3 {
+                font-size: 1.5em;
             }
         }
 
@@ -762,11 +927,13 @@
             }
             
             .template-box,
-            .tool-box {
+            .tool-box,
+            .feature-box {
                 padding: 20px;
             }
             
-            .methods-list {
+            .methods-list,
+            .usage-steps {
                 padding: 25px;
             }
         }
@@ -808,6 +975,7 @@
             <div class="logo editable" onclick="scrollToTop()">OSINT С НУЛЯ</div>
             <div class="nav-links">
                 <a class="nav-link editable" onclick="scrollToSection('home')">ГЛАВНАЯ</a>
+                <a class="nav-link editable" onclick="scrollToSection('about')">О ПРОЕКТЕ</a>
                 <a class="nav-link editable" onclick="scrollToSection('templates')">ШАБЛОНЫ</a>
                 <a class="nav-link editable" onclick="scrollToSection('tools')">ИНСТРУМЕНТЫ</a>
                 <a class="nav-link editable" onclick="scrollToSection('methods')">МЕТОДИКИ</a>
@@ -858,6 +1026,61 @@
             <div class="hero-section">
                 <h1 class="glow editable">OSINT С НУЛЯ</h1>
                 <p class="subtitle editable">Полное руководство по разведке открытых источников</p>
+            </div>
+        </section>
+
+        <!-- О проекте -->
+        <section id="about" class="section">
+            <h2 class="section-title editable">О ПРОЕКТЕ</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 class="editable">Миссия проекта</h3>
+                    <p class="editable">Этот сайт создан для системного обучения OSINT - открытой разведке. Мы даём инструменты и знания, чтобы каждый мог защитить себя и близких в цифровом пространстве.</p>
+                    
+                    <h3 class="editable">Для кого это?</h3>
+                    <ul class="editable">
+                        <li><strong>Новичкам</strong> - полный путь от основ до продвинутых техник</li>
+                        <li><strong>IT-специалистам</strong> - углубление знаний в кибербезопасности</li>
+                        <li><strong>Журналистам</strong> - проверка информации и источников</li>
+                        <li><strong>Всем пользователям</strong> - защита персональных данных онлайн</li>
+                    </ul>
+
+                    <h3 class="editable">Что вы найдёте здесь?</h3>
+                    <div class="features-grid">
+                        <div class="feature-box editable">
+                            <h4>📚 Пошаговые инструкции</h4>
+                            <p>Готовые шаблоны для разных типов расследований</p>
+                        </div>
+                        <div class="feature-box editable">
+                            <h4>🛠️ Проверенные инструменты</h4>
+                            <p>Только рабочие сервисы и методики</p>
+                        </div>
+                        <div class="feature-box editable">
+                            <h4>🎯 Практические кейсы</h4>
+                            <p>Реальные примеры и сценарии применения</p>
+                        </div>
+                        <div class="feature-box editable">
+                            <h4>🛡️ Безопасность прежде всего</h4>
+                            <p>Этичное использование технологий и методов</p>
+                        </div>
+                    </div>
+
+                    <h3 class="editable">Как пользоваться?</h3>
+                    <div class="usage-steps">
+                        <ol class="editable">
+                            <li>Изучите базовые шаблоны в разделе "Шаблоны"</li>
+                            <li>Освойте инструменты в соответствующем разделе</li>
+                            <li>Применяйте знания на практике, начиная с простых задач</li>
+                            <li>Всегда соблюдайте законодательство и этические нормы</li>
+                        </ol>
+                    </div>
+
+                    <div class="important-note">
+                        <h4>⚖️ Важно!</h4>
+                        <p class="editable">Все материалы предназначены только для легитимного использования: защита персональных данных, проверка информации, образовательные цели.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1287,6 +1510,7 @@
                 tools: [],
                 methods: [],
                 resources: [],
+                about: {},
                 navigation: {},
                 hero: {}
             };
@@ -1318,6 +1542,18 @@
             document.querySelectorAll('.method-item').forEach((method, index) => {
                 content.methods.push(method.innerHTML);
             });
+            
+            // Сохраняем страницу О проекте
+            content.about = {
+                mission: document.querySelector('.about-text h3:nth-child(1)')?.nextElementSibling?.innerHTML || '',
+                forWhom: document.querySelector('.about-text ul')?.innerHTML || '',
+                features: Array.from(document.querySelectorAll('.feature-box')).map(box => ({
+                    title: box.querySelector('h4').innerHTML,
+                    description: box.querySelector('p').innerHTML
+                })),
+                usage: document.querySelector('.usage-steps ol')?.innerHTML || '',
+                important: document.querySelector('.important-note p')?.innerHTML || ''
+            };
             
             // Сохраняем навигацию
             content.navigation = {
@@ -1419,6 +1655,39 @@
                             methodItems[index].innerHTML = method;
                         }
                     });
+                }
+                
+                // Загружаем страницу О проекте
+                if (content.about) {
+                    if (content.about.mission) {
+                        const missionPara = document.querySelector('.about-text h3:nth-child(1)')?.nextElementSibling;
+                        if (missionPara) missionPara.innerHTML = content.about.mission;
+                    }
+                    
+                    if (content.about.forWhom) {
+                        const forWhomList = document.querySelector('.about-text ul');
+                        if (forWhomList) forWhomList.innerHTML = content.about.forWhom;
+                    }
+                    
+                    if (content.about.features) {
+                        const featureBoxes = document.querySelectorAll('.feature-box');
+                        content.about.features.forEach((feature, index) => {
+                            if (featureBoxes[index]) {
+                                featureBoxes[index].querySelector('h4').innerHTML = feature.title;
+                                featureBoxes[index].querySelector('p').innerHTML = feature.description;
+                            }
+                        });
+                    }
+                    
+                    if (content.about.usage) {
+                        const usageList = document.querySelector('.usage-steps ol');
+                        if (usageList) usageList.innerHTML = content.about.usage;
+                    }
+                    
+                    if (content.about.important) {
+                        const importantNote = document.querySelector('.important-note p');
+                        if (importantNote) importantNote.innerHTML = content.about.important;
+                    }
                 }
                 
                 // Загружаем навигацию
