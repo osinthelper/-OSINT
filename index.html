@@ -21,11 +21,11 @@
             scroll-behavior: smooth;
         }
 
-        /* Верхняя навигационная панель */
+        /* Верхняя навигационная панель - БОЛЬШАЯ на ПК */
         .top-nav {
             background: #111111;
             border-bottom: 2px solid #00ff00;
-            padding: 20px 0;
+            padding: 30px 0; /* Увеличил паддинг для ПК */
             position: fixed;
             top: 0;
             left: 0;
@@ -44,22 +44,8 @@
 
         /* Компактный режим при скролле */
         .top-nav.compact {
-            padding: 10px 0;
+            padding: 25px 0; /* Увеличил компактный режим для ПК */
             box-shadow: 0 1px 10px rgba(0, 255, 0, 0.1);
-        }
-
-        .top-nav.compact .logo {
-            font-size: 1.2em;
-        }
-
-        .top-nav.compact .nav-link {
-            padding: 6px 12px;
-            font-size: 0.85em;
-        }
-
-        .top-nav.compact .admin-btn {
-            padding: 6px 12px;
-            font-size: 0.85em;
         }
 
         .nav-container {
@@ -74,7 +60,7 @@
 
         .logo {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5em;
+            font-size: 2em; /* Увеличил логотип для ПК */
             font-weight: 700;
             color: #ffffff;
             text-shadow: 0 0 10px #ffffff;
@@ -84,19 +70,20 @@
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px; /* Увеличил расстояние между ссылками */
         }
 
         .nav-link {
             font-family: 'JetBrains Mono', monospace;
             color: #ffffff;
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 12px 20px; /* Увеличил паддинг ссылок */
             border: 1px solid transparent;
             border-radius: 4px;
             transition: all 0.3s ease;
             font-weight: 500;
             cursor: pointer;
+            font-size: 1.1em; /* Увеличил размер шрифта */
         }
 
         .nav-link:hover {
@@ -115,12 +102,13 @@
             background: transparent;
             color: #ffffff;
             border: 1px solid #00ff00;
-            padding: 8px 16px;
+            padding: 12px 20px; /* Увеличил кнопку админа */
             border-radius: 4px;
             cursor: pointer;
             font-family: 'JetBrains Mono', monospace;
             font-weight: 500;
             transition: all 0.3s ease;
+            font-size: 1.1em; /* Увеличил шрифт */
         }
 
         .admin-btn:hover {
@@ -131,7 +119,7 @@
 
         /* Основной контент */
         .main-content {
-            margin-top: 100px;
+            margin-top: 130px; /* Увеличил отступ для большой навигации */
             padding: 40px 20px;
             max-width: 1200px;
             margin-left: auto;
@@ -141,13 +129,13 @@
 
         /* Компактный режим для контента */
         .main-content.compact {
-            margin-top: 70px;
+            margin-top: 95px; /* Увеличил компактный отступ */
         }
 
         /* Секции */
         .section {
             margin-bottom: 80px;
-            scroll-margin-top: 100px;
+            scroll-margin-top: 130px; /* Увеличил для большой навигации */
         }
 
         .section-title {
@@ -436,7 +424,7 @@
         .admin-controls {
             display: none;
             position: fixed;
-            top: 70px;
+            top: 100px; /* Поднял ниже для большой навигации */
             right: 20px;
             background: #111111;
             border: 1px solid #00ff00;
@@ -527,32 +515,54 @@
             z-index: 999;
         }
 
-        /* Адаптивность для мобильных */
+        /* Адаптивность для мобильных - МАЛЕНЬКАЯ навигация */
         @media (max-width: 768px) {
+            /* Маленькая навигация для мобильных */
+            .top-nav {
+                padding: 15px 0; /* Уменьшил паддинг для мобильных */
+            }
+
+            .top-nav.compact {
+                padding: 10px 0; /* Уменьшил компактный режим */
+            }
+
             .nav-container {
                 flex-direction: column;
-                gap: 10px;
-                padding: 10px;
+                gap: 8px;
+                padding: 8px;
             }
             
             .nav-links {
-                gap: 8px;
+                gap: 6px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
             
             .nav-link {
+                padding: 6px 10px;
+                font-size: 0.8em; /* Уменьшил шрифт */
+            }
+            
+            .logo {
+                font-size: 1.3em; /* Уменьшил логотип */
+            }
+            
+            .admin-btn {
                 padding: 6px 12px;
-                font-size: 0.8em;
+                font-size: 0.8em; /* Уменьшил кнопку админа */
             }
             
             .main-content {
-                margin-top: 120px;
+                margin-top: 100px; /* Уменьшил отступ для мобильных */
                 padding: 20px 10px;
             }
 
             .main-content.compact {
-                margin-top: 90px;
+                margin-top: 70px; /* Уменьшил компактный отступ */
+            }
+            
+            .section {
+                scroll-margin-top: 100px; /* Уменьшил для мобильных */
             }
             
             h1 {
@@ -571,7 +581,7 @@
             }
             
             .admin-controls {
-                top: 90px;
+                top: 80px; /* Поднял для маленькой навигации */
                 right: 10px;
                 width: 170px;
             }
@@ -580,26 +590,20 @@
                 padding: 40px 0;
                 margin-bottom: 40px;
             }
-
-            /* Компактный режим для мобильных */
-            .top-nav.compact {
-                padding: 8px 0;
-            }
-
-            .top-nav.compact .logo {
-                font-size: 1.1em;
-            }
-
-            .top-nav.compact .nav-link {
-                padding: 5px 10px;
-                font-size: 0.75em;
-            }
         }
 
         /* Для очень маленьких экранов */
         @media (max-width: 480px) {
+            .top-nav {
+                padding: 12px 0; /* Еще меньше для очень маленьких экранов */
+            }
+
+            .top-nav.compact {
+                padding: 8px 0;
+            }
+
             .nav-links {
-                gap: 5px;
+                gap: 4px;
             }
             
             .nav-link {
@@ -608,15 +612,19 @@
             }
             
             .logo {
-                font-size: 1.2em;
+                font-size: 1.1em;
             }
             
             .main-content {
-                margin-top: 130px;
+                margin-top: 90px;
             }
 
             .main-content.compact {
-                margin-top: 100px;
+                margin-top: 60px;
+            }
+            
+            .section {
+                scroll-margin-top: 90px;
             }
             
             h1 {
