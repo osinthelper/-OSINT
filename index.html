@@ -36,7 +36,82 @@
             font-weight: 400;
         }
 
-        /* Верхняя навигационная панель */
+        /* Стили для изображений */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .content-image:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--accent-color);
+        }
+
+        .image-caption {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 30px auto;
+            display: block;
+            border: 2px solid var(--accent-color);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .method-visual {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .method-scheme {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 2px solid var(--accent-color);
+        }
+
+        .resource-visual {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .resource-image {
+            max-width: 200px;
+            height: auto;
+            border-radius: 12px;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .resource-image:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Остальные стили остаются без изменений */
         .top-nav {
             background: rgba(17, 17, 17, 0.95);
             backdrop-filter: blur(10px);
@@ -135,7 +210,6 @@
             box-shadow: var(--shadow-glow);
         }
 
-        /* Основной контент */
         .main-content {
             margin-top: 140px;
             padding: 50px 25px;
@@ -148,7 +222,6 @@
             margin-top: 100px;
         }
 
-        /* Секции */
         .section {
             margin-bottom: 100px;
             scroll-margin-top: 120px;
@@ -203,7 +276,6 @@
             margin: 0 auto;
         }
 
-        /* Стили для страницы О проекте */
         .about-content {
             max-width: 900px;
             margin: 0 auto;
@@ -358,7 +430,6 @@
             font-size: 1em;
         }
 
-        /* Стили для шаблонов */
         .templates-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -475,7 +546,6 @@
             font-weight: 600;
         }
 
-        /* Стили для инструментов */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -519,7 +589,6 @@
             line-height: 1.6;
         }
 
-        /* Стили для методик */
         .methods-list {
             background: var(--secondary-bg);
             border: 1px solid var(--border-color);
@@ -545,7 +614,6 @@
             font-weight: 600;
         }
 
-        /* Админ панель */
         .admin-panel {
             display: none;
             position: fixed;
@@ -614,7 +682,6 @@
             box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
         }
 
-        /* Вертикальная админ-панель */
         .admin-controls {
             display: none;
             position: fixed;
@@ -660,7 +727,6 @@
             background: #b91c1c;
         }
 
-        /* Редактируемые элементы */
         .edit-mode .editable {
             border: 1px dashed var(--accent-color);
             padding: 8px;
@@ -750,202 +816,62 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Адаптивность для планшетов */
+        /* Адаптивность */
         @media (max-width: 1024px) {
-            .nav-container {
-                padding: 0 20px;
-            }
-            
-            .nav-links {
-                gap: 20px;
-            }
-            
-            .nav-link {
-                padding: 8px 16px;
-                font-size: 0.9em;
-            }
-            
-            .main-content {
-                padding: 40px 20px;
-            }
-            
-            .section-title {
-                font-size: 2.4em;
-            }
-            
-            h1 {
-                font-size: 3em;
-            }
-            
-            .templates-grid {
-                grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-                gap: 25px;
-            }
-            
-            .features-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
+            .nav-container { padding: 0 20px; }
+            .nav-links { gap: 20px; }
+            .nav-link { padding: 8px 16px; font-size: 0.9em; }
+            .main-content { padding: 40px 20px; }
+            .section-title { font-size: 2.4em; }
+            h1 { font-size: 3em; }
+            .templates-grid { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
+            .features-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+            .hero-image { max-width: 500px; height: 250px; }
         }
 
-        /* Адаптивность для мобильных */
         @media (max-width: 768px) {
-            .top-nav {
-                padding: 20px 0;
-            }
-
-            .top-nav.compact {
-                padding: 15px 0;
-            }
-
-            .nav-container {
-                flex-direction: column;
-                gap: 15px;
-                padding: 0 15px;
-            }
-            
-            .nav-links {
-                gap: 8px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-link {
-                padding: 8px 12px;
-                font-size: 0.85em;
-            }
-            
-            .logo {
-                font-size: 1.5em;
-            }
-            
-            .admin-btn {
-                padding: 8px 16px;
-                font-size: 0.85em;
-            }
-            
-            .main-content {
-                margin-top: 120px;
-                padding: 30px 15px;
-            }
-
-            .main-content.compact {
-                margin-top: 90px;
-            }
-            
-            .section {
-                scroll-margin-top: 100px;
-                margin-bottom: 70px;
-            }
-            
-            h1 {
-                font-size: 2.4em;
-            }
-            
-            .section-title {
-                font-size: 2em;
-                margin-bottom: 40px;
-            }
-            
-            .subtitle {
-                font-size: 1.2em;
-            }
-            
-            .templates-grid,
-            .tools-grid,
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .admin-controls {
-                top: 90px;
-                right: 15px;
-                width: 200px;
-            }
-            
-            .hero-section {
-                padding: 60px 0;
-                margin-bottom: 60px;
-            }
-
-            .template-box,
-            .tool-box,
-            .feature-box {
-                padding: 25px;
-            }
-            
-            .about-text h3 {
-                font-size: 1.5em;
-            }
+            .top-nav { padding: 20px 0; }
+            .top-nav.compact { padding: 15px 0; }
+            .nav-container { flex-direction: column; gap: 15px; padding: 0 15px; }
+            .nav-links { gap: 8px; flex-wrap: wrap; justify-content: center; }
+            .nav-link { padding: 8px 12px; font-size: 0.85em; }
+            .logo { font-size: 1.5em; }
+            .admin-btn { padding: 8px 16px; font-size: 0.85em; }
+            .main-content { margin-top: 120px; padding: 30px 15px; }
+            .main-content.compact { margin-top: 90px; }
+            .section { scroll-margin-top: 100px; margin-bottom: 70px; }
+            h1 { font-size: 2.4em; }
+            .section-title { font-size: 2em; margin-bottom: 40px; }
+            .subtitle { font-size: 1.2em; }
+            .templates-grid, .tools-grid, .features-grid { grid-template-columns: 1fr; gap: 20px; }
+            .admin-controls { top: 90px; right: 15px; width: 200px; }
+            .hero-section { padding: 60px 0; margin-bottom: 60px; }
+            .template-box, .tool-box, .feature-box { padding: 25px; }
+            .about-text h3 { font-size: 1.5em; }
+            .hero-image { max-width: 100%; height: 200px; margin: 20px auto; }
+            .tool-image { width: 60px; height: 60px; }
         }
 
-        /* Для очень маленьких экранов */
         @media (max-width: 480px) {
-            .top-nav {
-                padding: 18px 0;
-            }
-
-            .top-nav.compact {
-                padding: 12px 0;
-            }
-
-            .nav-links {
-                gap: 6px;
-            }
-            
-            .nav-link {
-                padding: 6px 10px;
-                font-size: 0.8em;
-            }
-            
-            .logo {
-                font-size: 1.3em;
-            }
-            
-            .main-content {
-                margin-top: 110px;
-            }
-
-            .main-content.compact {
-                margin-top: 80px;
-            }
-            
-            .section {
-                scroll-margin-top: 90px;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
-            
-            .section-title {
-                font-size: 1.7em;
-            }
-            
-            .subtitle {
-                font-size: 1.1em;
-            }
-            
-            .template-box,
-            .tool-box,
-            .feature-box {
-                padding: 20px;
-            }
-            
-            .methods-list,
-            .usage-steps {
-                padding: 25px;
-            }
+            .top-nav { padding: 18px 0; }
+            .top-nav.compact { padding: 12px 0; }
+            .nav-links { gap: 6px; }
+            .nav-link { padding: 6px 10px; font-size: 0.8em; }
+            .logo { font-size: 1.3em; }
+            .main-content { margin-top: 110px; }
+            .main-content.compact { margin-top: 80px; }
+            .section { scroll-margin-top: 90px; }
+            h1 { font-size: 2em; }
+            .section-title { font-size: 1.7em; }
+            .subtitle { font-size: 1.1em; }
+            .template-box, .tool-box, .feature-box { padding: 20px; }
+            .methods-list, .usage-steps { padding: 25px; }
+            .hero-image { height: 150px; }
         }
 
-        /* Эффекты */
         @keyframes glow {
-            from { 
-                text-shadow: 0 0 5px var(--accent-color); 
-            }
-            to { 
-                text-shadow: 0 0 15px var(--accent-color), 0 0 25px var(--accent-color); 
-            }
+            from { text-shadow: 0 0 5px var(--accent-color); }
+            to { text-shadow: 0 0 15px var(--accent-color), 0 0 25px var(--accent-color); }
         }
 
         .glow {
@@ -958,7 +884,6 @@
             75% { transform: translateX(5px); }
         }
 
-        /* Утилиты */
         .text-accent {
             color: var(--accent-color);
         }
@@ -969,7 +894,7 @@
     </style>
 </head>
 <body>
-    <!-- Верхняя навигационная панель -->
+    <!-- Навигация -->
     <nav class="top-nav">
         <div class="nav-container">
             <div class="logo editable" onclick="scrollToTop()">OSINT С НУЛЯ</div>
@@ -987,10 +912,10 @@
         </div>
     </nav>
 
-    <!-- Оверлей для затемнения -->
+    <!-- Оверлей -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Панель ввода кода -->
+    <!-- Админ панель -->
     <div class="admin-panel" id="adminPanel">
         <button class="close-btn" onclick="hideAdminPanel()">×</button>
         <h3>🔐 АДМИН ДОСТУП</h3>
@@ -998,7 +923,7 @@
         <p style="text-align: center; color: var(--text-muted); margin-top: 15px; font-size: 0.9em;">Введите код, состоящий из 4 цифр</p>
     </div>
 
-    <!-- Вертикальная панель управления -->
+    <!-- Управление -->
     <div class="admin-controls" id="adminControls">
         <button class="edit-btn">✏️ РЕДАКТИРОВАТЬ</button>
         <button class="add-btn">➕ НОВЫЙ ШАБЛОН</button>
@@ -1008,7 +933,7 @@
         <button class="logout-btn">🚪 ВЫЙТИ</button>
     </div>
 
-    <!-- Диалог добавления ссылки -->
+    <!-- Диалог ссылок -->
     <div class="link-dialog" id="linkDialog">
         <h4 style="color: var(--text-primary); margin-bottom: 20px;">🔗 ДОБАВИТЬ ССЫЛКУ</h4>
         <input type="text" id="linkText" placeholder="Текст ссылки">
@@ -1019,20 +944,25 @@
         </div>
     </div>
 
-    <!-- Основной контент -->
+    <!-- Контент -->
     <div class="main-content">
-        <!-- Главная секция -->
+        <!-- Главная -->
         <section id="home" class="section">
             <div class="hero-section">
                 <h1 class="glow editable">OSINT С НУЛЯ</h1>
                 <p class="subtitle editable">Полное руководство по разведке открытых источников</p>
+                
+                <!-- Главное фото -->
+                <img src="https://media.licdn.com/dms/image/v2/D4E12AQH4Y9U4BarhWQ/article-cover_image-shrink_720_1280/B4EZietZvhHgAM-/0/1755009375351?e=2147483647&v=beta&t=oKG1icoMr-XFUF_c6vyVB5NL6Lj4sCtkIcMy1ZRb6R0" 
+                     alt="OSINT исследование" 
+                     class="hero-image">
+                <p class="image-caption">Профессиональный подход к анализу открытых источников информации</p>
             </div>
         </section>
 
         <!-- О проекте -->
         <section id="about" class="section">
             <h2 class="section-title editable">О ПРОЕКТЕ</h2>
-            
             <div class="about-content">
                 <div class="about-text">
                     <h3 class="editable">Миссия проекта</h3>
@@ -1140,7 +1070,9 @@
             <h2 class="section-title editable">ИНСТРУМЕНТЫ</h2>
             <div class="tools-grid">
                 <div class="tool-box">
-                    <div class="tool-icon">🔍</div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvewNX7tCPiWwqawlzQL0f6zu5WEkqCfsm1A&s" 
+                         alt="Поиск по соцсетям" 
+                         class="tool-image">
                     <h3 class="tool-title editable">ПОИСК ПО СОЦСЕТЯМ</h3>
                     <p class="tool-description editable">Инструменты для поиска информации в социальных сетях и анализа профилей</p>
                 </div>
@@ -1165,6 +1097,15 @@
         <!-- Методики -->
         <section id="methods" class="section">
             <h2 class="section-title editable">МЕТОДИКИ</h2>
+            
+            <!-- Схема OSINT -->
+            <div class="method-visual">
+                <img src="https://cdn.securitylab.ru/upload/medialibrary/522/b3mcplk0dzbnzawnz6hb2llb7x2wl3jm.png" 
+                     alt="Методика OSINT исследований" 
+                     class="method-scheme">
+                <p class="image-caption">Схема работы с открытыми источниками информации</p>
+            </div>
+
             <div class="methods-list">
                 <div class="method-item editable">
                     <strong>Методика сбора информации</strong> - Пошаговый подход к поиску и анализу данных
@@ -1199,24 +1140,29 @@
                     <div class="tool-icon">📖</div>
                     <h3 class="tool-title editable">ОБУЧАЮЩИЕ МАТЕРИАЛЫ</h3>
                     <p class="tool-description editable">Книги, курсы и руководства по OSINT разведке</p>
+                    
+                    <!-- Глобус с сетью -->
+                    <div class="resource-visual">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3cCnwbBZmuMRMkUXVocpJZIbGKY3cuasPgg&s" 
+                             alt="Глобальная сеть OSINT" 
+                             class="resource-image">
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 
     <script>
-        // Переменные для управления навигацией
+        // Весь JavaScript код остается без изменений
         let lastScrollY = window.scrollY;
         let isNavHidden = false;
         let scrollTimeout;
 
-        // Функция для управления видимостью навигации
         function handleNavVisibility() {
             const nav = document.querySelector('.top-nav');
             const mainContent = document.querySelector('.main-content');
             const currentScrollY = window.scrollY;
             
-            // Всегда показываем навигацию в самом верху
             if (currentScrollY === 0) {
                 nav.classList.remove('hidden');
                 nav.classList.add('compact');
@@ -1225,12 +1171,10 @@
                 return;
             }
             
-            // Скролл вниз - скрываем навигацию
             if (currentScrollY > lastScrollY && !isNavHidden && currentScrollY > 100) {
                 nav.classList.add('hidden');
                 isNavHidden = true;
             } 
-            // Скролл вверх - показываем навигацию
             else if (currentScrollY < lastScrollY && isNavHidden) {
                 nav.classList.remove('hidden');
                 nav.classList.add('compact');
@@ -1238,7 +1182,6 @@
                 isNavHidden = false;
             }
             
-            // Обновляем компактный режим при скролле
             if (currentScrollY > 50) {
                 nav.classList.add('compact');
                 mainContent.classList.add('compact');
@@ -1250,13 +1193,11 @@
             lastScrollY = currentScrollY;
         }
 
-        // Оптимизированный обработчик скролла
         function throttledScrollHandler() {
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(handleNavVisibility, 10);
         }
 
-        // Функции для навигации
         function scrollToSection(sectionId) {
             const element = document.getElementById(sectionId);
             if (element) {
@@ -1268,7 +1209,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Функции для админ-панели
         function showAdminPanel() {
             document.getElementById('adminPanel').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
@@ -1281,7 +1221,6 @@
             document.getElementById('adminCode').value = '';
         }
 
-        // Проверка кода
         function checkCode(input) {
             if (input.value.length === 4) {
                 if (input.value === '2303') {
@@ -1301,12 +1240,10 @@
             }
         }
 
-        // Остальной JavaScript код
         let editMode = false;
         let deleteMode = false;
         let currentEditingElement = null;
 
-        // РЕДАКТИРОВАНИЕ ВСЕХ ЭЛЕМЕНТОВ
         function toggleEditMode() {
             editMode = !editMode;
             document.body.classList.toggle('edit-mode', editMode);
@@ -1314,18 +1251,14 @@
             const btn = document.querySelector('.edit-btn');
             if (editMode) {
                 btn.innerHTML = '💾 ЗАВЕРШИТЬ РЕДАКТИРОВАНИЕ';
-                // Включаем редактирование для ВСЕХ элементов с классом editable
                 document.querySelectorAll('.editable').forEach(el => {
                     el.setAttribute('contenteditable', 'true');
                     el.addEventListener('click', handleElementClick);
                     el.addEventListener('input', handleElementEdit);
                 });
-                
-                // Показываем подсказку
                 showEditHint();
             } else {
                 btn.innerHTML = '✏️ РЕДАКТИРОВАТЬ';
-                // Выключаем редактирование
                 document.querySelectorAll('.editable').forEach(el => {
                     el.removeAttribute('contenteditable');
                     el.removeEventListener('click', handleElementClick);
@@ -1334,7 +1267,6 @@
                 saveChanges();
             }
             
-            // Выключаем режим удаления при включении редактирования
             if (editMode) {
                 deleteMode = false;
                 document.querySelector('.delete-btn').innerHTML = '🗑️ УДАЛИТЬ ШАБЛОН';
@@ -1347,7 +1279,6 @@
         function handleElementClick(e) {
             if (editMode) {
                 currentEditingElement = e.target;
-                // Подсвечиваем выбранный элемент
                 document.querySelectorAll('.editable').forEach(el => {
                     el.style.background = 'rgba(0, 217, 255, 0.03)';
                 });
@@ -1356,7 +1287,6 @@
         }
 
         function handleElementEdit(e) {
-            // Автоматически сохраняем изменения при редактировании
             if (editMode) {
                 clearTimeout(window.saveTimeout);
                 window.saveTimeout = setTimeout(saveChanges, 1000);
@@ -1393,7 +1323,6 @@
             }, 3000);
         }
 
-        // Режим удаления шаблонов
         function toggleDeleteMode() {
             deleteMode = !deleteMode;
             const btn = document.querySelector('.delete-btn');
@@ -1401,34 +1330,29 @@
             if (deleteMode) {
                 btn.innerHTML = '❌ ОТМЕНИТЬ УДАЛЕНИЕ';
                 btn.style.background = '#dc2626';
-                // Показываем кнопки удаления на всех шаблонах
                 document.querySelectorAll('.delete-template').forEach(deleteBtn => {
                     deleteBtn.style.display = 'flex';
                 });
             } else {
                 btn.innerHTML = '🗑️ УДАЛИТЬ ШАБЛОН';
                 btn.style.background = '#dc2626';
-                // Скрываем кнопки удаления
                 document.querySelectorAll('.delete-template').forEach(deleteBtn => {
                     deleteBtn.style.display = 'none';
                 });
             }
         }
 
-        // Удаление шаблона
         function deleteTemplate(button) {
             if (deleteMode) {
                 const template = button.closest('.template-box');
                 if (confirm('Удалить этот шаблон?')) {
                     template.remove();
-                    // Обновляем номера оставшихся шаблонов
                     updateTemplateNumbers();
                     saveChanges();
                 }
             }
         }
 
-        // Обновление номеров шаблонов
         function updateTemplateNumbers() {
             const templates = document.querySelectorAll('.template-box');
             templates.forEach((template, index) => {
@@ -1437,7 +1361,6 @@
             });
         }
 
-        // Добавить новый шаблон
         function addNewTemplate() {
             const templatesGrid = document.getElementById('templatesGrid');
             const newNumber = templatesGrid.children.length + 1;
@@ -1459,7 +1382,6 @@
             
             templatesGrid.appendChild(newTemplate);
             
-            // Если режим редактирования включен, делаем новый шаблон редактируемым
             if (editMode) {
                 newTemplate.querySelectorAll('.editable').forEach(el => {
                     el.setAttribute('contenteditable', 'true');
@@ -1468,13 +1390,11 @@
                 });
             }
             
-            // Если режим удаления включен, показываем кнопку удаления
             if (deleteMode) {
                 newTemplate.querySelector('.delete-template').style.display = 'flex';
             }
         }
 
-        // Диалог добавления ссылки
         function showLinkDialog() {
             if (!editMode || !currentEditingElement) {
                 alert('Сначала включите режим редактирования и выберите элемент для добавления ссылки');
@@ -1503,7 +1423,6 @@
             }
         }
 
-        // Сохранение изменений
         function saveChanges() {
             const content = {
                 templates: [],
@@ -1515,7 +1434,6 @@
                 hero: {}
             };
             
-            // Сохраняем каждый шаблон
             document.querySelectorAll('.template-box').forEach((template, index) => {
                 const templateData = {
                     title: template.querySelector('.template-title').innerHTML,
@@ -1529,7 +1447,6 @@
                 content.templates.push(templateData);
             });
             
-            // Сохраняем инструменты
             document.querySelectorAll('.tool-box').forEach((tool, index) => {
                 const toolData = {
                     title: tool.querySelector('.tool-title').innerHTML,
@@ -1538,12 +1455,10 @@
                 content.tools.push(toolData);
             });
             
-            // Сохраняем методики
             document.querySelectorAll('.method-item').forEach((method, index) => {
                 content.methods.push(method.innerHTML);
             });
             
-            // Сохраняем страницу О проекте
             content.about = {
                 mission: document.querySelector('.about-text h3:nth-child(1)')?.nextElementSibling?.innerHTML || '',
                 forWhom: document.querySelector('.about-text ul')?.innerHTML || '',
@@ -1555,13 +1470,11 @@
                 important: document.querySelector('.important-note p')?.innerHTML || ''
             };
             
-            // Сохраняем навигацию
             content.navigation = {
                 logo: document.querySelector('.logo').innerHTML,
                 links: Array.from(document.querySelectorAll('.nav-link')).map(link => link.innerHTML)
             };
             
-            // Сохраняем герой-секцию
             content.hero = {
                 title: document.querySelector('h1').innerHTML,
                 subtitle: document.querySelector('.subtitle').innerHTML
@@ -1570,7 +1483,6 @@
             localStorage.setItem('osint-site-data', JSON.stringify(content));
             
             if (editMode) {
-                // Показываем временное уведомление о сохранении
                 showSaveNotification();
             }
         }
@@ -1608,13 +1520,11 @@
             }, 500);
         }
 
-        // Загрузка сохраненных данных
         function loadSavedData() {
             const saved = localStorage.getItem('osint-site-data');
             if (saved) {
                 const content = JSON.parse(saved);
                 
-                // Загружаем шаблоны
                 if (content.templates && content.templates.length > 0) {
                     const templatesGrid = document.getElementById('templatesGrid');
                     templatesGrid.innerHTML = '';
@@ -1636,7 +1546,6 @@
                     });
                 }
                 
-                // Загружаем инструменты
                 if (content.tools && content.tools.length > 0) {
                     const toolBoxes = document.querySelectorAll('.tool-box');
                     content.tools.forEach((toolData, index) => {
@@ -1647,7 +1556,6 @@
                     });
                 }
                 
-                // Загружаем методики
                 if (content.methods && content.methods.length > 0) {
                     const methodItems = document.querySelectorAll('.method-item');
                     content.methods.forEach((method, index) => {
@@ -1657,7 +1565,6 @@
                     });
                 }
                 
-                // Загружаем страницу О проекте
                 if (content.about) {
                     if (content.about.mission) {
                         const missionPara = document.querySelector('.about-text h3:nth-child(1)')?.nextElementSibling;
@@ -1690,7 +1597,6 @@
                     }
                 }
                 
-                // Загружаем навигацию
                 if (content.navigation) {
                     if (content.navigation.logo) {
                         document.querySelector('.logo').innerHTML = content.navigation.logo;
@@ -1705,7 +1611,6 @@
                     }
                 }
                 
-                // Загружаем герой-секцию
                 if (content.hero) {
                     if (content.hero.title) {
                         document.querySelector('h1').innerHTML = content.hero.title;
@@ -1717,7 +1622,6 @@
             }
         }
 
-        // Выход из админки
         function logoutAdmin() {
             editMode = false;
             deleteMode = false;
@@ -1732,12 +1636,9 @@
             document.querySelector('.delete-btn').innerHTML = '🗑️ УДАЛИТЬ ШАБЛОН';
         }
 
-        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            // Добавляем оптимизированный обработчик скролла
             window.addEventListener('scroll', throttledScrollHandler);
             
-            // Назначаем обработчики кнопок
             document.getElementById('adminAccessBtn').addEventListener('click', showAdminPanel);
             document.querySelector('.edit-btn').addEventListener('click', toggleEditMode);
             document.querySelector('.add-btn').addEventListener('click', addNewTemplate);
@@ -1746,16 +1647,13 @@
             document.querySelector('.delete-btn').addEventListener('click', toggleDeleteMode);
             document.querySelector('.logout-btn').addEventListener('click', logoutAdmin);
             
-            // Обработчик для кода
             document.getElementById('adminCode').addEventListener('input', function(e) {
                 checkCode(this);
             });
             
-            // Обработчики для диалога ссылок
             document.querySelectorAll('.link-dialog button')[0].addEventListener('click', insertLink);
             document.querySelectorAll('.link-dialog button')[1].addEventListener('click', hideLinkDialog);
             
-            // Закрытие админ-панели по клику на оверлей
             document.getElementById('overlay').addEventListener('click', hideAdminPanel);
             
             loadSavedData();
